@@ -1,0 +1,220 @@
+/* src/pages/Timetable.css */
+
+.timetable-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- HEADER SECTION --- */
+.timetable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* Aligns "Weekly schedule" button to bottom */
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 16px;
+}
+
+.header-text h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.semester-badge {
+  font-size: 0.85rem;
+  color: #64748B; /* Slate 500 */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.weekly-btn {
+  padding: 8px 16px;
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.weekly-btn:hover {
+  background: #E2E8F0;
+  color: var(--text-primary);
+}
+
+/* --- DATE NAVIGATOR (< 12 Feb >) --- */
+.date-navigator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-arrow {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #64748B;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.nav-arrow:hover {
+  background: #F1F5F9;
+  color: var(--accent-primary);
+}
+
+.current-date-display {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 140px;
+  text-align: center;
+  border-bottom: 2px solid var(--accent-primary); /* Blue underline like image */
+  padding-bottom: 4px;
+}
+
+/* --- CLASS LIST (The Cards) --- */
+.class-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.schedule-card {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 8px; /* Slightly sharper corners like reference */
+  padding: 24px;
+  position: relative;
+  transition: all 0.2s ease;
+  border-left: 4px solid transparent; /* Status Indicator Strip */
+}
+
+.schedule-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transform: translateY(-1px);
+}
+
+/* Status Colors for Left Border */
+.schedule-card.active { border-left-color: var(--accent-primary); background: #F0F9FF; }
+.schedule-card.completed { border-left-color: #10B981; }
+.schedule-card.upcoming { border-left-color: #94A3B8; }
+
+/* Content Layout */
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.subject-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary); /* Dark Blue/Black */
+  margin-bottom: 6px;
+}
+
+.subject-code {
+  color: #64748B;
+  font-weight: 500;
+}
+
+.time-row {
+  font-size: 0.9rem;
+  color: #475569;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.duration-span {
+  color: #94A3B8;
+  font-size: 0.85rem;
+  margin-left: 6px;
+}
+
+.faculty-row {
+  font-size: 0.9rem;
+  color: #64748B;
+  margin-bottom: 12px;
+}
+
+.type-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: #F1F5F9;
+  color: #475569;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* --- QR & ACTION BUTTONS --- */
+.action-area {
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.btn-qr {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+  animation: pulse-blue 2s infinite;
+}
+
+.btn-qr:hover {
+  background: #0284C7;
+}
+
+.status-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-text.recorded { color: #10B981; }
+.status-text.upcoming { color: #94A3B8; }
+
+@keyframes pulse-blue {
+  0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(14, 165, 233, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .card-content { flex-direction: column; gap: 16px; }
+  .action-area { align-items: flex-start; width: 100%; }
+  .btn-qr { width: 100%; justify-content: center; }
+}
