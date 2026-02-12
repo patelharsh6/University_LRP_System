@@ -6,12 +6,15 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Attendance from './pages/Attendance';
 import Timetable from './pages/Timetable';
+import Reports from './pages/Reports';
+import Billing from './pages/Billing';
+import Announcements from './pages/Announcements';  
 
 function App() {
   return (
     <div className="App">
       <Layout >
-        <Timetable />
+        <Announcements />
       </Layout>
       
       

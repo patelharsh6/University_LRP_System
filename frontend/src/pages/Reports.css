@@ -1,0 +1,227 @@
+/* src/pages/Reports.css */
+
+.reports-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- 1. HEADER & CONTROLS --- */
+.reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.header-title h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.header-title p {
+  color: #64748B;
+  font-size: 0.9rem;
+}
+
+/* Search Bar */
+.report-search-box {
+  position: relative;
+  min-width: 280px;
+}
+
+.report-search-input {
+  width: 100%;
+  padding: 10px 16px 10px 40px; /* Space for icon */
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.report-search-input:focus {
+  border-color: var(--accent-primary);
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94A3B8;
+}
+
+/* --- 2. CATEGORY TABS --- */
+.category-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  overflow-x: auto;
+  padding-bottom: 4px; /* For scrollbar spacing if needed */
+}
+
+.cat-tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border-light);
+  background: white;
+  color: #64748B;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.cat-tab:hover {
+  background: #F8FAFC;
+  color: var(--text-primary);
+}
+
+.cat-tab.active {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 10px rgba(14, 165, 233, 0.2);
+}
+
+/* --- 3. REPORTS GRID --- */
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* --- CARD DESIGN --- */
+.report-card {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.report-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  border-color: #CBD5E1;
+}
+
+/* Top Section: Icon & Status */
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.report-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+/* Icon Background Colors */
+.icon-blue { background: #E0F2FE; color: #0284C7; }
+.icon-green { background: #DCFCE7; color: #166534; }
+.icon-purple { background: #F3E8FF; color: #7E22CE; }
+.icon-orange { background: #FFEDD5; color: #C2410C; }
+
+/* Status Badges */
+.status-pill {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-available { background: #DCFCE7; color: #166534; } /* Green */
+.status-pending { background: #FEF9C3; color: #854D0E; }   /* Yellow */
+.status-locked { background: #F1F5F9; color: #94A3B8; }     /* Gray */
+
+/* Content */
+.card-content h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  color: #64748B;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+/* Footer: Buttons */
+.card-actions {
+  margin-top: auto; /* Pushes buttons to bottom */
+  display: flex;
+  gap: 12px;
+}
+
+.btn-view {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  background: white;
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-view:hover {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+}
+
+.btn-download {
+  flex: 1;
+  padding: 10px;
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-download:hover {
+  background: #0284C7;
+}
+
+/* Disabled State */
+.btn-disabled {
+  background: #F1F5F9;
+  color: #94A3B8;
+  cursor: not-allowed;
+  border: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .reports-header { flex-direction: column; align-items: flex-start; }
+  .report-search-box { width: 100%; }
+  .reports-grid { grid-template-columns: 1fr; }
+}

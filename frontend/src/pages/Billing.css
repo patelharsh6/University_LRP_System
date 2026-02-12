@@ -1,0 +1,206 @@
+/* src/pages/Fees.css */
+
+.fees-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- 1. SUMMARY CARDS (Financial Dashboard) --- */
+.fees-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.fee-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fee-card-title {
+  font-size: 0.85rem;
+  color: #64748B;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.fee-amount {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* Color Accents for Cards */
+.text-blue { color: #0EA5E9; }
+.text-green { color: #10B981; }
+.text-red { color: #EF4444; }
+.text-orange { color: #F59E0B; }
+
+/* --- 2. TABS & FILTERS --- */
+.fees-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.fee-tabs {
+  display: flex;
+  gap: 8px;
+  background: white;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+}
+
+.fee-tab-btn {
+  padding: 8px 20px;
+  border: none;
+  background: transparent;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748B;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.fee-tab-btn.active {
+  background: var(--accent-bg); /* Light Blue */
+  color: var(--accent-primary); /* Dark Blue */
+}
+
+/* --- 3. DESKTOP TABLE --- */
+.fees-table-container {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.fees-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fees-table th {
+  background: #F8FAFC;
+  color: #64748B;
+  font-weight: 600;
+  text-align: left;
+  padding: 16px 24px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.fees-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+/* Right align amounts for financial look */
+.amount-col {
+  text-align: right;
+  font-family: 'Inter', monospace; /* Monospace for numbers alignment */
+  font-weight: 600;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.badge-paid { background: #DCFCE7; color: #166534; }
+.badge-pending { background: #FEE2E2; color: #991B1B; }
+.badge-partial { background: #FEF3C7; color: #92400E; }
+
+/* Action Buttons */
+.btn-pay {
+  padding: 8px 16px;
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-pay:hover { background: #0284C7; }
+
+.btn-receipt {
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid var(--border-light);
+  color: #64748B;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-receipt:hover { background: #F8FAFC; color: var(--text-primary); }
+
+/* --- 4. MOBILE CARD VIEW (Hidden on Desktop) --- */
+.fees-mobile-list {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mobile-fee-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.mobile-card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.mobile-card-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.mobile-label { color: #64748B; }
+.mobile-value { font-weight: 600; color: var(--text-primary); }
+
+/* --- RESPONSIVE MEDIA QUERY --- */
+@media (max-width: 768px) {
+  .fees-table-container { display: none; } /* Hide Table */
+  .fees-mobile-list { display: flex; } /* Show Cards */
+  
+  .fees-summary { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .fees-controls { flex-direction: column; align-items: stretch; }
+  .fee-tabs { justify-content: space-between; }
+  .fee-tab-btn { flex: 1; text-align: center; padding: 10px; }
+}

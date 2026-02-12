@@ -7,7 +7,10 @@ export const menuConfig = {
     { category: "Academics", items: [
         { title: "My Courses", icon: <FaBook />, path: "/courses" },
         { title: "Attendance", icon: <FaClipboardList />, path: "/attendance" },
-        { title: "Results", icon: <FaClipboardList />, path: "/results" }
+        { title: "Timetable", icon: <FaClipboardList />, path: "/timetable" },
+        { title: "Results", icon: <FaClipboardList />, path: "/results" },
+        { title: "Reports", icon: <FaClipboardList />, path: "/reports" },
+        { title: "Announcements", icon: <FaClipboardList />, path: "/announcements" },
       ]
     },
     { category: "Finance", items: [ { title: "Fees", icon: <FaMoneyBill />, path: "/fees" } ] }
