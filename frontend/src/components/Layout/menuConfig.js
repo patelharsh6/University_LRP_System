@@ -3,7 +3,7 @@ import { FaHome, FaBook, FaMoneyBill, FaChalkboardTeacher, FaUsers, FaCog, FaCli
 
 export const menuConfig = {
   student: [
-    { category: "Main", items: [ { title: "Dashboard", icon: <FaHome />, path: "/dashboard" } ] },
+    { category: "Main", items: [ { title: "Dashboard", icon: <FaHome />, path: "/" } ] },
     { category: "Academics", items: [
         { title: "My Courses", icon: <FaBook />, path: "/courses" },
         { title: "Attendance", icon: <FaClipboardList />, path: "/attendance" },
@@ -11,10 +11,11 @@ export const menuConfig = {
         { title: "Results", icon: <FaClipboardList />, path: "/results" },
         { title: "Reports", icon: <FaClipboardList />, path: "/reports" },
         { title: "Announcements", icon: <FaClipboardList />, path: "/announcements" },
+        { title: "Feedback", icon: <FaClipboardList />, path: "/feedback" },
         { title: "Billing", icon: <FaClipboardList />, path: "/billing" },
       ]
     },
-    { category: "Finance", items: [ { title: "Fees", icon: <FaMoneyBill />, path: "/fees" } ] }
+    // { category: "Finance", items: [ { title: "Fees", icon: <FaMoneyBill />, path: "/fees" } ] }
   ],
 
   faculty: [

@@ -1,109 +1,177 @@
+// src/pages/Dashboard.jsx
 import React from 'react';
-import { FaGraduationCap, FaChalkboardTeacher, FaCalendarCheck, FaRupeeSign } from 'react-icons/fa';
-// Make sure to include the CSS we made
+import './Dashboard.css';
+import { 
+  FaUserGraduate, FaCalendarCheck, FaMoneyBillWave, FaChartLine, 
+  FaQrcode, FaBell, FaCheckCircle, FaExclamationTriangle 
+} from 'react-icons/fa';
+import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const Dashboard = () => {
+  
+  // --- MOCK DATA ---
+  const studentName = "Harsh";
+  const currentDate = "Thu, 12 Feb 2026";
+  
+  const stats = [
+    { title: "Attendance", value: "82%", icon: <FaCalendarCheck />, color: "stat-green", sub: "Good" },
+    { title: "SGPA (Sem 5)", value: "8.72", icon: <FaUserGraduate />, color: "stat-purple", sub: "Excellent" },
+    { title: "Pending Fees", value: "₹45k", icon: <FaMoneyBillWave />, color: "stat-red", sub: "Due Soon" },
+    { title: "Credits Earned", value: "124", icon: <FaChartLine />, color: "stat-blue", sub: "Total" },
+  ];
+
+  const upcomingClasses = [
+    { id: 1, subject: "Data Structures", time: "10:00", ampm: "AM", faculty: "Prof. Sharma", room: "Lab 3", isLive: false },
+    { id: 2, subject: "DBMS (Lecture)", time: "12:00", ampm: "PM", faculty: "Prof. Verma", room: "Room 204", isLive: true }, // LIVE
+    { id: 3, subject: "Operating Systems", time: "02:00", ampm: "PM", faculty: "Prof. Gupta", room: "Hall B", isLive: false },
+  ];
+
+  const announcements = [
+    { id: 1, title: "Mid-Sem Exam Schedule Released", date: "Today" },
+    { id: 2, title: "TechFest Registration Open", date: "Yesterday" },
+    { id: 3, title: "Holiday on Friday declared", date: "10 Feb" },
+  ];
+
+  const performanceData = [
+    { name: 'Sem 1', sgpa: 7.2 },
+    { name: 'Sem 2', sgpa: 7.8 },
+    { name: 'Sem 3', sgpa: 8.1 },
+    { name: 'Sem 4', sgpa: 8.5 },
+    { name: 'Sem 5', sgpa: 8.7 },
+  ];
+
   return (
     <div className="dashboard-container">
-      {/* 1. Welcome Banner */}
-      <div style={{ marginBottom: '30px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: '#1E293B' }}>Hello, Student! 👋</h1>
-        <p style={{ color: '#64748B', marginTop: '5px' }}>Here is what's happening with your academics today.</p>
-      </div>
-
-      {/* 2. Stats Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px', marginBottom: '40px' }}>
-        
-        {/* Card 1 */}
-        <div className="card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-            <div>
-              <h3>Attendance</h3>
-              <div className="value">85%</div>
-            </div>
-            <div style={{ padding: '10px', background: '#D1FAE5', borderRadius: '10px', color: '#10B981' }}>
-              <FaCalendarCheck size={20} />
-            </div>
-          </div>
-          <p style={{ fontSize: '0.85rem', color: '#10B981', marginTop: '10px', fontWeight: '600' }}>+2% this week</p>
+      
+      {/* 🟦 1. WELCOME HEADER */}
+      <div className="welcome-header">
+        <div className="welcome-text">
+          <h1>Good Morning, {studentName} 👋</h1>
+          <p>Semester 6 • Computer Science Engineering</p>
         </div>
-
-        {/* Card 2 */}
-        <div className="card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-            <div>
-              <h3>CGPA</h3>
-              <div className="value">8.4</div>
-            </div>
-            <div style={{ padding: '10px', background: '#DBEAFE', borderRadius: '10px', color: '#3B82F6' }}>
-              <FaGraduationCap size={20} />
-            </div>
-          </div>
-          <p style={{ fontSize: '0.85rem', color: '#64748B', marginTop: '10px' }}>Last updated: Yesterday</p>
-        </div>
-
-        {/* Card 3 */}
-        <div className="card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-            <div>
-              <h3>Fees Due</h3>
-              <div className="value">₹0</div>
-            </div>
-            <div style={{ padding: '10px', background: '#FEE2E2', borderRadius: '10px', color: '#EF4444' }}>
-              <FaRupeeSign size={20} />
-            </div>
-          </div>
-          <p style={{ fontSize: '0.85rem', color: '#10B981', marginTop: '10px', fontWeight: '600' }}>No dues pending</p>
-        </div>
-
-        {/* Card 4 */}
-        <div className="card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-            <div>
-              <h3>Active Courses</h3>
-              <div className="value">6</div>
-            </div>
-            <div style={{ padding: '10px', background: '#FEF3C7', borderRadius: '10px', color: '#F59E0B' }}>
-              <FaChalkboardTeacher size={20} />
-            </div>
-          </div>
-          <p style={{ fontSize: '0.85rem', color: '#64748B', marginTop: '10px' }}>2 classes today</p>
+        <div className="header-right">
+          <span className="date-badge">{currentDate}</span>
+          <button className="quick-action-btn">
+            <FaQrcode /> Scan QR
+          </button>
         </div>
       </div>
 
-      {/* 3. Section Split (Notices & Timetable) */}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px' }}>
+      {/* 🟩 2. SUMMARY STATS */}
+      <div className="stats-grid">
+        {stats.map((stat, index) => (
+          <div key={index} className="stat-card">
+            <div className="stat-header">
+              <span className="stat-label">{stat.title}</span>
+              <div className={`stat-icon ${stat.color}`}>{stat.icon}</div>
+            </div>
+            <div className="stat-value">{stat.value}</div>
+            <div style={{ fontSize: '0.8rem', color: '#94A3B8', marginTop: '4px' }}>
+              {stat.sub}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* 🟨 3. MAIN CONTENT GRID */}
+      <div className="dashboard-grid">
         
-        {/* Big Card: Recent Activity */}
-        <div className="card" style={{ height: '300px' }}>
-          <h3 style={{ color: '#1E293B', marginBottom: '20px' }}>📢 Notice Board</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-            <div style={{ padding: '15px', borderLeft: '4px solid #3B82F6', background: '#F8FAFC', borderRadius: '0 8px 8px 0' }}>
-              <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#334155' }}>Mid-Sem Exam Schedule Released</h4>
-              <p style={{ fontSize: '0.85rem', color: '#64748B', marginTop: '4px' }}>The exam timetable for Oct 2026 has been published.</p>
-            </div>
-            <div style={{ padding: '15px', borderLeft: '4px solid #10B981', background: '#F8FAFC', borderRadius: '0 8px 8px 0' }}>
-              <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#334155' }}>Holiday Declaration</h4>
-              <p style={{ fontSize: '0.85rem', color: '#64748B', marginTop: '4px' }}>University will remain closed on Friday.</p>
-            </div>
+        {/* LEFT COLUMN (70%) */}
+        <div className="left-column">
+          
+          {/* Upcoming Classes */}
+          <div className="section-title">
+            <span>📅 Today's Schedule</span>
+            <span style={{ fontSize: '0.85rem', color: '#0EA5E9', cursor: 'pointer' }}>View Timetable</span>
+          </div>
+          <div className="dashboard-card" style={{ marginBottom: '24px' }}>
+            {upcomingClasses.map((cls) => (
+              <div key={cls.id} className={`class-item ${cls.isLive ? 'live' : ''}`}>
+                <div className="class-time-box">
+                  <div className="time-start">{cls.time}</div>
+                  <div className="time-ampm">{cls.ampm}</div>
+                </div>
+                <div className="class-details">
+                  <div className="subject-name">
+                    {cls.subject}
+                    {cls.isLive && <span style={{ color: '#0EA5E9', marginLeft: '8px', fontSize: '0.8rem' }}>● LIVE</span>}
+                  </div>
+                  <div className="faculty-name">{cls.faculty} • {cls.room}</div>
+                </div>
+                {cls.isLive && (
+                  <button className="btn-scan-small">
+                    <FaQrcode /> Mark
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Recent Announcements */}
+          <div className="section-title">
+            <span>📢 Notice Board</span>
+            <span style={{ fontSize: '0.85rem', color: '#0EA5E9', cursor: 'pointer' }}>View All</span>
+          </div>
+          <div className="dashboard-card">
+            {announcements.map((item) => (
+              <div key={item.id} className="announce-item">
+                <div className="announce-title">{item.title}</div>
+                <div className="announce-meta">{item.date} • Admin Office</div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Side Card: Quick Timetable */}
-        <div className="card">
-          <h3 style={{ color: '#1E293B', marginBottom: '20px' }}>⏳ Today's Classes</h3>
-          <ul style={{ listStyle: 'none' }}>
-            <li style={{ marginBottom: '15px', borderBottom: '1px solid #F1F5F9', paddingBottom: '10px' }}>
-              <div style={{ fontWeight: '700', fontSize: '0.9rem', color: '#334155' }}>10:00 AM - Data Structures</div>
-              <div style={{ fontSize: '0.8rem', color: '#94A3B8' }}>Lab 3 • Prof. Sharma</div>
-            </li>
-            <li style={{ marginBottom: '15px', borderBottom: '1px solid #F1F5F9', paddingBottom: '10px' }}>
-              <div style={{ fontWeight: '700', fontSize: '0.9rem', color: '#334155' }}>12:00 PM - Database Mgmt</div>
-              <div style={{ fontSize: '0.8rem', color: '#94A3B8' }}>Room 204 • Prof. Gupta</div>
-            </li>
-          </ul>
-        </div>
+        {/* RIGHT COLUMN (30%) */}
+        <div className="right-column">
+          
+          {/* Performance Graph */}
+          <div className="section-title">📊 Performance</div>
+          <div className="dashboard-card" style={{ height: '220px', padding: '10px' }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={performanceData}>
+                <defs>
+                  <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#0EA5E9" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#0EA5E9" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <Tooltip />
+                <Area type="monotone" dataKey="sgpa" stroke="#0EA5E9" fillOpacity={1} fill="url(#colorPv)" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
 
+          {/* Fee Reminder */}
+          <div className="fee-warning-card">
+            <div style={{ color: '#7F1D1D', fontWeight: '600' }}>⚠️ Pending Fees</div>
+            <div className="due-amount">₹45,000</div>
+            <p style={{ fontSize: '0.85rem', color: '#B91C1C', marginBottom: '12px' }}>Due by 15 Mar 2026</p>
+            <button className="btn-pay-now">Pay Now</button>
+          </div>
+
+          {/* 🟪 4. RECENT ACTIVITY */}
+          <div className="section-title" style={{ marginTop: '32px' }}>Recent Activity</div>
+          <div className="activity-timeline">
+            <div className="activity-item">
+              <div className="activity-icon" style={{ background: '#DCFCE7', color: '#166534' }}><FaCheckCircle /></div>
+              <div className="activity-content">
+                <h4>Attendance Marked</h4>
+                <p>Data Structures (Lab)</p>
+                <div className="activity-time">10:05 AM Today</div>
+              </div>
+            </div>
+            <div className="activity-item">
+              <div className="activity-icon" style={{ background: '#FEF3C7', color: '#92400E' }}><FaExclamationTriangle /></div>
+              <div className="activity-content">
+                <h4>Assignment Due</h4>
+                <p>Cloud Computing Unit 3</p>
+                <div className="activity-time">Tomorrow, 11:59 PM</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );
