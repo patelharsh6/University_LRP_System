@@ -12,8 +12,13 @@ import Feedback from './pages/Feedback';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Results from './pages/Results';
 import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
 
 function App() {
+
+  if (true) {
+    return <Login/>;
+  }
   return (
     <div className="App">
       <Layout >
@@ -32,7 +37,6 @@ function App() {
         
         </BrowserRouter>
       </Layout>
-      
       
     </div>
   );
