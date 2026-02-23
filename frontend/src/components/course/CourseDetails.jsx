@@ -15,16 +15,11 @@ const CourseDetails = ({ courseId, studentId, onBack, api }) => {
   const [selectedContent, setSelectedContent] = useState(null);
   const [showAssignmentModal, setShowAssignmentModal] = useState(false);
   const [currentAssignment, setCurrentAssignment] = useState(null);
-  const [activeTab, setActiveTab] = useState('content'); // content, resources, announcements
-  const [expandedSections, setExpandedSections] = useState({
-    objectives: true,
-    prerequisites: false,
-    stats: false
-  });
+  const [activeTab, setActiveTab] = useState('content');
 
   useEffect(() => {
     fetchCourseDetails();
-  }, [courseId, studentId]);
+  }, [courseId, studentId, api]);
 
   useEffect(() => {
     if (course && course.chapters && course.chapters.length > 0) {
@@ -60,10 +55,8 @@ const CourseDetails = ({ courseId, studentId, onBack, api }) => {
 
   const handleAssignmentSubmit = async (submissionData) => {
     try {
-      // API call would go here
       console.log('Submitting assignment:', submissionData);
       
-      // Update local state
       setCourse(prevCourse => {
         const updatedCourse = { ...prevCourse };
         updatedCourse.chapters = updatedCourse.chapters.map(chapter => ({
@@ -100,13 +93,6 @@ const CourseDetails = ({ courseId, studentId, onBack, api }) => {
     });
     
     return total > 0 ? Math.round((completed / total) * 100) : 0;
-  };
-
-  const toggleSection = (section) => {
-    setExpandedSections(prev => ({
-      ...prev,
-      [section]: !prev[section]
-    }));
   };
 
   if (loading) {

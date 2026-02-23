@@ -24,7 +24,7 @@ const CourseList = ({ studentId, onSelectCourse, api }) => {
 
   useEffect(() => {
     fetchEnrolledCourses();
-  }, [studentId]);
+  }, [studentId, api]);
 
   useEffect(() => {
     applyFilters();

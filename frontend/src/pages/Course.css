@@ -1,296 +1,107 @@
-/* src/pages/Course.css */
+/* Course Module Main Styles - Clean Light Theme */
+.course-module {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  background: #F8FAFC; /* Soft off-white background */
+  color: #0F172A;      /* Dark slate for readable text */
+}
 
-.course-container {
-  max-width: 1000px;
+/* Container */
+.course-list-container,
+.course-details-container {
+  max-width: 1400px;
   margin: 0 auto;
-  font-family: 'Inter', sans-serif;
-  padding-bottom: 40px;
+  padding: 1.5rem;
 }
 
-/* --- 1. COURSE HEADER --- */
-.course-header {
-  background: #FFFFFF;
-  padding: 32px;
-  border-radius: 16px;
-  border: 1px solid #E2E8F0;
-  margin-bottom: 24px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.course-title-section h1 {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #0F172A;
-  margin-bottom: 8px;
-}
-
-.course-meta {
-  display: flex;
-  gap: 16px;
-  color: #64748B;
-  font-size: 0.9rem;
-  font-weight: 500;
-  flex-wrap: wrap;
-}
-
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.course-status {
-  background: #DCFCE7;
-  color: #166534;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.btn-download-syllabus {
-  background: white;
-  border: 1px solid #E2E8F0;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-weight: 600;
-  color: #475569;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s;
-}
-
-.btn-download-syllabus:hover {
-  background: #F8FAFC;
-  color: #0EA5E9;
-  border-color: #0EA5E9;
-}
-
-/* --- 2. PROGRESS OVERVIEW CARD --- */
-.progress-card {
-  background: #FFFFFF;
-  padding: 24px 32px;
-  border-radius: 16px;
-  border: 1px solid #E2E8F0;
-  margin-bottom: 32px;
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.progress-stats {
-  min-width: 120px;
-}
-
-.progress-percentage {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #0EA5E9;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.progress-label {
-  font-size: 0.85rem;
-  color: #64748B;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.progress-bar-container {
-  flex: 1;
-}
-
-.progress-track-large {
-  width: 100%;
-  height: 12px;
-  background: #F1F5F9;
-  border-radius: 6px;
-  overflow: hidden;
-  margin-bottom: 12px;
-}
-
-.progress-fill-large {
-  height: 100%;
-  background: #0EA5E9;
-  border-radius: 6px;
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.progress-details {
-  display: flex;
-  gap: 24px;
-  font-size: 0.9rem;
-  color: #475569;
-  font-weight: 500;
-}
-
-/* --- 3. CHAPTER ACCORDION --- */
-.chapter-list {
+/* Loading Spinner */
+.loading-spinner {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #64748B;
 }
 
-.chapter-card {
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #E2E8F0;
+  border-top: 3px solid #0EA5E9; /* Adani Blue */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error Container */
+.error-container {
+  text-align: center;
+  padding: 3rem;
   background: #FFFFFF;
+  border-radius: 16px;
   border: 1px solid #E2E8F0;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: box-shadow 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-.chapter-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #EF4444;
 }
 
-.chapter-header {
-  padding: 20px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  background: #FFFFFF;
-  transition: background 0.2s;
+.error-message {
+  color: #EF4444;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
 }
 
-.chapter-header:hover {
-  background: #F8FAFC;
-}
-
-.chapter-title-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.chapter-number {
-  background: #F1F5F9;
-  color: #475569;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  font-weight: 700;
-}
-
-.chapter-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #0F172A;
-}
-
-.chapter-meta {
-  font-size: 0.85rem;
-  color: #94A3B8;
-  margin-top: 4px;
-}
-
-/* --- 4. CONTENT ITEMS (Inside Chapter) --- */
-.chapter-content {
-  border-top: 1px solid #E2E8F0;
-  background: #F8FAFC;
-}
-
-.resource-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px 16px 48px;
-  border-bottom: 1px solid #F1F5F9;
-  transition: background 0.2s;
-  cursor: pointer;
-}
-
-.resource-item:hover {
-  background: #FFFFFF;
-}
-
-.resource-item:last-child {
-  border-bottom: none;
-}
-
-.resource-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.resource-icon {
-  font-size: 1.2rem;
-}
-
-/* Dynamic Icon Colors */
-.icon-pdf { color: #EF4444; }
-.icon-video { color: #8B5CF6; }
-.icon-assignment { color: #F59E0B; }
-
-.resource-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #334155;
-}
-
-.resource-meta {
-  font-size: 0.8rem;
-  color: #94A3B8;
-  margin-top: 4px;
-}
-
-/* Badges & Status */
-.status-indicator {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.badge-graded {
-  background: #DCFCE7;
-  color: #166534;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.badge-due {
-  background: #FEF2F2;
-  color: #991B1B;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.complete-btn {
-  background: none;
+.retry-btn {
+  background: #0EA5E9; /* Adani Blue */
+  color: white;
   border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s;
+  transition: all 0.3s;
 }
 
-.complete-btn:hover {
-  transform: scale(1.1);
+.retry-btn:hover {
+  background: #0284C7;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2);
 }
 
-/* Mobile Responsive */
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .course-header { flex-direction: column; align-items: flex-start; }
-  .progress-card { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .progress-bar-container { width: 100%; }
-  .resource-item { flex-direction: column; align-items: flex-start; gap: 12px; padding-left: 24px; }
-  .status-indicator { width: 100%; justify-content: flex-start; margin-top: 8px; }
+  .course-list-container,
+  .course-details-container {
+    padding: 1rem;
+  }
 }
