@@ -1,326 +1,249 @@
+// src/pages/Course.jsx
 import React, { useState, useEffect } from 'react';
-import CourseList from '../components/course/CourseList';
-import CourseDetails from '../components/course/CourseDetails';
-import './course.css';
-
-// API service (move to separate file in real implementation)
-const api = {
-  getEnrolledCourses: async (studentId) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          success: true,
-          data: mockEnrolledCourses
-        });
-      }, 500);
-    });
-  },
-  
-  getCourseDetails: async (courseId, studentId) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const course = mockCourseDetails.find(c => c.id === courseId);
-        resolve({
-          success: true,
-          data: course
-        });
-      }, 500);
-    });
-  }
-};
-
-// Mock data (move to separate file in real implementation)
-const mockEnrolledCourses = [
-  {
-    id: 1,
-    code: 'CS101',
-    name: 'Introduction to Computer Science',
-    faculty: 'Dr. Alan Turing',
-    facultyAvatar: 'https://i.pravatar.cc/150?img=1',
-    credits: 4,
-    semester: 'Fall 2024',
-    department: 'Computer Science',
-    progress: 45,
-    status: 'active',
-    totalContents: 24,
-    completedContents: 11,
-    thumbnail: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    nextDeadline: '2024-03-15',
-    grade: 'A-'
-  },
-  {
-    id: 2,
-    code: 'CS201',
-    name: 'Data Structures and Algorithms',
-    faculty: 'Dr. Ada Lovelace',
-    facultyAvatar: 'https://i.pravatar.cc/150?img=2',
-    credits: 4,
-    semester: 'Fall 2024',
-    department: 'Computer Science',
-    progress: 78,
-    status: 'active',
-    totalContents: 32,
-    completedContents: 25,
-    thumbnail: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80',
-    nextDeadline: '2024-03-20',
-    grade: 'B+'
-  },
-  {
-    id: 3,
-    code: 'CS301',
-    name: 'Database Management Systems',
-    faculty: 'Dr. Grace Hopper',
-    facultyAvatar: 'https://i.pravatar.cc/150?img=3',
-    credits: 3,
-    semester: 'Fall 2024',
-    department: 'Computer Science',
-    progress: 100,
-    status: 'completed',
-    totalContents: 28,
-    completedContents: 28,
-    thumbnail: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80',
-    finalGrade: 'A'
-  }
-];
-
-const mockCourseDetails = [
-  {
-    id: 1,
-    code: 'CS101',
-    name: 'Introduction to Computer Science',
-    faculty: {
-      name: 'Dr. Alan Turing',
-      avatar: 'https://i.pravatar.cc/150?img=1',
-      title: 'Professor of Computer Science',
-      email: 'a.turing@university.edu'
-    },
-    credits: 4,
-    semester: 'Fall 2024',
-    department: 'Computer Science',
-    description: 'An introductory course covering fundamental concepts of computer science including programming, algorithms, and computational thinking.',
-    objectives: [
-      'Understand basic programming concepts',
-      'Learn problem-solving techniques',
-      'Gain familiarity with algorithms',
-      'Develop computational thinking'
-    ],
-    prerequisites: ['None'],
-    stats: {
-      studentsEnrolled: 156,
-      averageGrade: 'B+',
-      passRate: '92%',
-      workload: '10-12 hrs/week'
-    },
-    chapters: [
-      {
-        id: 101,
-        title: 'Introduction to Computing',
-        order: 1,
-        duration: '2 weeks',
-        content: [
-          {
-            id: 1001,
-            title: 'What is Computer Science?',
-            type: 'video',
-            duration: '15:30',
-            url: 'https://example.com/video1',
-            thumbnail: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-            viewed: true,
-            completed: true,
-            transcript: 'Full transcript here...'
-          },
-          {
-            id: 1002,
-            title: 'History of Computing',
-            type: 'reading',
-            pages: 25,
-            url: 'https://example.com/pdf1',
-            readTime: '45 min',
-            viewed: true,
-            completed: true
-          },
-          {
-            id: 1003,
-            title: 'Computer Basics Assignment',
-            type: 'assignment',
-            dueDate: '2024-03-15',
-            maxScore: 100,
-            submitted: true,
-            graded: true,
-            score: 85,
-            feedback: 'Good work! Clear understanding of concepts.',
-            submissions: [
-              { date: '2024-03-14', file: 'assignment1.pdf' }
-            ]
-          },
-          {
-            id: 1004,
-            title: 'Discussion: Ethics in Computing',
-            type: 'discussion',
-            participants: 45,
-            lastActive: '2 hours ago',
-            viewed: false,
-            completed: false
-          }
-        ]
-      },
-      {
-        id: 102,
-        title: 'Programming Fundamentals',
-        order: 2,
-        duration: '3 weeks',
-        content: [
-          {
-            id: 1005,
-            title: 'Variables and Data Types',
-            type: 'video',
-            duration: '20:45',
-            url: 'https://example.com/video2',
-            thumbnail: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1469&q=80',
-            viewed: true,
-            completed: true
-          },
-          {
-            id: 1006,
-            title: 'Control Structures',
-            type: 'video',
-            duration: '25:15',
-            url: 'https://example.com/video3',
-            thumbnail: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-            viewed: false,
-            completed: false
-          },
-          {
-            id: 1007,
-            title: 'Programming Exercises',
-            type: 'lab',
-            url: 'https://example.com/lab1',
-            environment: 'Python 3.9',
-            timeEstimate: '2 hours',
-            viewed: false,
-            completed: false
-          },
-          {
-            id: 1008,
-            title: 'Week 2 Quiz',
-            type: 'quiz',
-            questions: 10,
-            timeLimit: '30 min',
-            attempts: 3,
-            attemptsUsed: 0,
-            viewed: false,
-            completed: false
-          }
-        ]
-      },
-      {
-        id: 103,
-        title: 'Algorithms',
-        order: 3,
-        duration: '3 weeks',
-        content: [
-          {
-            id: 1009,
-            title: 'Introduction to Algorithms',
-            type: 'video',
-            duration: '18:20',
-            url: 'https://example.com/video4',
-            thumbnail: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-            viewed: false,
-            completed: false
-          },
-          {
-            id: 1010,
-            title: 'Algorithm Analysis',
-            type: 'reading',
-            pages: 35,
-            url: 'https://example.com/pdf2',
-            readTime: '1.5 hours',
-            viewed: false,
-            completed: false
-          },
-          {
-            id: 1011,
-            title: 'Algorithm Implementation Project',
-            type: 'assignment',
-            dueDate: '2024-04-01',
-            maxScore: 100,
-            submitted: false,
-            graded: false,
-            attachments: ['project_description.pdf', 'starter_code.zip']
-          }
-        ]
-      }
-    ],
-    announcements: [
-      {
-        id: 1001,
-        title: '📢 Mid-term Exam Schedule',
-        content: 'Mid-term exam will be held on March 20th in Room 301. Please bring your student ID.',
-        date: '2024-03-01',
-        postedBy: 'Dr. Alan Turing',
-        important: true,
-        attachments: ['exam_syllabus.pdf']
-      },
-      {
-        id: 1002,
-        title: '💡 Project Guidelines Released',
-        content: 'Final project guidelines are now available in the resources section. Start forming teams of 3-4 members.',
-        date: '2024-02-28',
-        postedBy: 'Teaching Assistant',
-        important: false
-      }
-    ],
-    resources: [
-      {
-        id: 2001,
-        title: 'Textbook: Computer Science Illuminated',
-        type: 'book',
-        author: 'Nell Dale',
-        url: '#'
-      },
-      {
-        id: 2002,
-        title: 'Lecture Slides - Week 1',
-        type: 'slides',
-        pages: 45,
-        url: '#'
-      }
-    ]
-  }
-];
+import './Course.css';
+import { 
+  FaFilePdf, FaVideo, FaTasks, FaCheckCircle, 
+  FaRegCircle, FaChevronDown, FaChevronUp, 
+  FaLock, FaDownload, FaChalkboardTeacher
+} from 'react-icons/fa';
 
 const Course = () => {
-  const [view, setView] = useState('list');
-  const [selectedCourseId, setSelectedCourseId] = useState(null);
-  const [studentId] = useState(1); // Get from auth context in real app
+  // 1. STATE MANAGEMENT
+  const [courseData, setCourseData] = useState(null);
+  const [expandedChapters, setExpandedChapters] = useState([]);
 
-  const handleSelectCourse = (courseId) => {
-    setSelectedCourseId(courseId);
-    setView('details');
+  // 2. MOCK DATA FETCHING (Simulating an API Call)
+  useEffect(() => {
+    // This represents the strict hierarchical JSON response from your backend
+    const mockApiResponse = {
+      id: "CS101",
+      title: "Data Structures & Algorithms",
+      faculty: "Prof. Arvind Sharma",
+      credits: 4,
+      semester: "Semester 6",
+      status: "Active",
+      chapters: [
+        {
+          id: 1,
+          title: "Introduction to Complexity",
+          items: [
+            { id: 101, type: "video", title: "Time & Space Complexity", duration: "45 mins", isCompleted: true, isLocked: false },
+            { id: 102, type: "pdf", title: "Big O Notation Slides", size: "2.4 MB", isCompleted: true, isLocked: false },
+            { id: 103, type: "assignment", title: "Assignment 1: Asymptotic Analysis", due: "10 Feb 2026", isCompleted: true, isLocked: false, grade: "9.5/10" }
+          ]
+        },
+        {
+          id: 2,
+          title: "Linear Data Structures",
+          items: [
+            { id: 201, type: "video", title: "Arrays & Linked Lists Deep Dive", duration: "55 mins", isCompleted: true, isLocked: false },
+            { id: 202, type: "pdf", title: "Linked List Implementations", size: "1.8 MB", isCompleted: false, isLocked: false },
+            { id: 203, type: "assignment", title: "Lab: Linked List Reversal", due: "20 Feb 2026", isCompleted: false, isLocked: false, grade: null }
+          ]
+        },
+        {
+          id: 3,
+          title: "Trees & Graphs",
+          items: [
+            { id: 301, type: "video", title: "Binary Search Trees", duration: "1 hr 10 mins", isCompleted: false, isLocked: true },
+            { id: 302, type: "pdf", title: "Graph Traversal Algorithms", size: "3.1 MB", isCompleted: false, isLocked: true }
+          ]
+        }
+      ]
+    };
+
+    setCourseData(mockApiResponse);
+    // Expand the first chapter by default for better UX
+    setExpandedChapters([mockApiResponse.chapters[0].id]);
+  }, []);
+
+  // Show loading state while data is being fetched
+  if (!courseData) return <div style={{ padding: '40px', textAlign: 'center' }}>Loading Course Data...</div>;
+
+  // 3. DYNAMIC PROGRESS CALCULATION
+  let totalItemsCount = 0;
+  let completedItemsCount = 0;
+  let totalAssignments = 0;
+  let completedAssignments = 0;
+
+  courseData.chapters.forEach(chapter => {
+    chapter.items.forEach(item => {
+      totalItemsCount++;
+      if (item.isCompleted) completedItemsCount++;
+      
+      if (item.type === 'assignment') {
+        totalAssignments++;
+        if (item.isCompleted) completedAssignments++;
+      }
+    });
+  });
+
+  // Prevent NaN if course is completely empty
+  const progressPercentage = totalItemsCount === 0 ? 0 : Math.round((completedItemsCount / totalItemsCount) * 100);
+
+  // 4. EVENT HANDLERS
+  const toggleChapter = (chapterId) => {
+    setExpandedChapters(prev => 
+      prev.includes(chapterId) 
+        ? prev.filter(id => id !== chapterId) 
+        : [...prev, chapterId]
+    );
   };
 
-  const handleBackToList = () => {
-    setView('list');
-    setSelectedCourseId(null);
+  // Simulating marking an item as complete
+  const handleItemClick = (chapterId, itemId, isLocked, isCompleted) => {
+    if (isLocked) {
+      alert("This item is locked. Please complete previous modules first.");
+      return;
+    }
+    
+    if (isCompleted) return; // Do nothing if already finished
+
+    // Update state to simulate backend success
+    const updatedChapters = courseData.chapters.map(chapter => {
+      if (chapter.id === chapterId) {
+        return {
+          ...chapter,
+          items: chapter.items.map(item => 
+            item.id === itemId ? { ...item, isCompleted: true } : item
+          )
+        };
+      }
+      return chapter;
+    });
+
+    setCourseData({ ...courseData, chapters: updatedChapters });
+  };
+
+  // Helper for dynamic icons
+  const getResourceIcon = (type) => {
+    switch(type) {
+      case 'pdf': return <FaFilePdf className="resource-icon icon-pdf" />;
+      case 'video': return <FaVideo className="resource-icon icon-video" />;
+      case 'assignment': return <FaTasks className="resource-icon icon-assignment" />;
+      default: return <FaFilePdf className="resource-icon" />;
+    }
   };
 
   return (
-    <div className="course-module">
-      {view === 'list' ? (
-        <CourseList 
-          studentId={studentId}
-          onSelectCourse={handleSelectCourse}
-          api={api}
-        />
-      ) : (
-        <CourseDetails
-          courseId={selectedCourseId}
-          studentId={studentId}
-          onBack={handleBackToList}
-          api={api}
-        />
-      )}
+    <div className="course-container">
+      
+      {/* 🟦 1. COURSE HEADER */}
+      <div className="course-header">
+        <div className="course-title-section">
+          <h1>{courseData.title}</h1>
+          <div className="course-meta">
+            <span className="meta-item"><strong>Code:</strong> {courseData.id}</span>
+            <span className="meta-item">|</span>
+            <span className="meta-item"><FaChalkboardTeacher /> {courseData.faculty}</span>
+            <span className="meta-item">|</span>
+            <span className="meta-item">{courseData.credits} Credits</span>
+          </div>
+        </div>
+        
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '12px' }}>
+          <span className="course-status">{courseData.status}</span>
+          <button className="btn-download-syllabus">
+            <FaDownload /> Syllabus PDF
+          </button>
+        </div>
+      </div>
+
+      {/* 🟩 2. PROGRESS OVERVIEW CARD */}
+      <div className="progress-card">
+        <div className="progress-stats">
+          <div className="progress-percentage">{progressPercentage}%</div>
+          <div className="progress-label">Course Completed</div>
+        </div>
+        <div className="progress-bar-container">
+          <div className="progress-track-large">
+            <div className="progress-fill-large" style={{ width: `${progressPercentage}%` }}></div>
+          </div>
+          <div className="progress-details">
+            <span>📚 {completedItemsCount} / {totalItemsCount} Materials Viewed</span>
+            <span>📝 {completedAssignments} / {totalAssignments} Assignments Submitted</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 🟨 3. CHAPTER HIERARCHY */}
+      <div className="chapter-list">
+        {courseData.chapters.map((chapter, index) => {
+          const isExpanded = expandedChapters.includes(chapter.id);
+          const chapCompletedCount = chapter.items.filter(i => i.isCompleted).length;
+          const chapTotalCount = chapter.items.length;
+
+          return (
+            <div key={chapter.id} className="chapter-card">
+              
+              {/* Accordion Header */}
+              <div className="chapter-header" onClick={() => toggleChapter(chapter.id)}>
+                <div className="chapter-title-wrapper">
+                  <div className="chapter-number">{index + 1}</div>
+                  <div>
+                    <div className="chapter-title">{chapter.title}</div>
+                    <div className="chapter-meta">{chapCompletedCount} / {chapTotalCount} items completed</div>
+                  </div>
+                </div>
+                <div>
+                  {isExpanded ? <FaChevronUp color="#94A3B8" /> : <FaChevronDown color="#94A3B8" />}
+                </div>
+              </div>
+
+              {/* Accordion Content */}
+              {isExpanded && (
+                <div className="chapter-content">
+                  {chapter.items.map((item) => (
+                    <div 
+                      key={item.id} 
+                      className="resource-item"
+                      onClick={() => handleItemClick(chapter.id, item.id, item.isLocked, item.isCompleted)}
+                    >
+                      
+                      <div className="resource-left">
+                        {getResourceIcon(item.type)}
+                        <div>
+                          <div className="resource-title" style={{ color: item.isLocked ? '#94A3B8' : '#334155' }}>
+                            {item.title}
+                          </div>
+                          <div className="resource-meta">
+                            {item.type === 'video' && item.duration}
+                            {item.type === 'pdf' && item.size}
+                            {item.type === 'assignment' && `Due: ${item.due}`}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="status-indicator">
+                        {/* Assignment Specific Badges */}
+                        {item.type === 'assignment' && item.grade && (
+                          <span className="badge-graded">Score: {item.grade}</span>
+                        )}
+                        {item.type === 'assignment' && !item.isCompleted && !item.isLocked && (
+                          <span className="badge-due">Pending</span>
+                        )}
+
+                        {/* Completion / Lock Status */}
+                        <button className="complete-btn" title={item.isCompleted ? "Completed" : "Mark as complete"}>
+                          {item.isLocked ? (
+                            <FaLock color="#CBD5E1" />
+                          ) : item.isCompleted ? (
+                            <FaCheckCircle color="#10B981" size={20} />
+                          ) : (
+                            <FaRegCircle color="#CBD5E1" size={20} />
+                          )}
+                        </button>
+                      </div>
+
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
     </div>
   );
 };
