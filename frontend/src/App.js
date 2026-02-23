@@ -12,13 +12,14 @@ import Feedback from './pages/Feedback';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Results from './pages/Results';
 import Dashboard from './pages/Dashboard';
+import Courses from './pages/Course';
 import Login from './pages/Login';
 
 function App() {
 
-  if (true) {
-    return <Login/>;
-  }
+  // if (true) {
+  //   return <Login/>;
+  // }
   return (
     <div className="App">
       <Layout >
@@ -33,6 +34,7 @@ function App() {
             <Route path="/announcements" element={<Announcements />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/results" element={<Results />} />
+            <Route path="/courses" element={<Courses />} />
           </Routes>
         
         </BrowserRouter>
