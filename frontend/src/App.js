@@ -12,7 +12,7 @@ import Feedback from './pages/Feedback';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Results from './pages/Results';
 import Dashboard from './pages/Dashboard';
-import Courses from './pages/Course';
+import Courses from './components/course_c/CoursesPage';
 import Login from './pages/Login';
 
 function App() {
