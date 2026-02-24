@@ -1074,7 +1074,7 @@ export const getChapterProgress = (chapter) => {
   return { done, total, pct: total === 0 ? 0 : Math.round((done / total) * 100) };
 };
 
-/** Flatten all assignments from chapters of a course */
+/** Flatten all assignments from chapters of a cours */
 export const getAssignments = (courseId) =>
   (CHAPTERS[courseId] || []).flatMap((ch) =>
     ch.items.filter((i) => i.type === "assignment" || i.type === "quiz")
