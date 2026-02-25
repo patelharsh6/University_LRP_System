@@ -14,12 +14,11 @@ import Results from './pages/student/Results';
 import Dashboard from './pages/student/Dashboard';
 import Courses from './components/course_c/CoursesPage';
 import Login from './pages/student/Login';
+import FacultyDashboard from './pages/faculty/FacultyDashboard';
+import CourseManagement from './pages/faculty/CourseManagement';
 
 function App() {
 
-  // if (true) {
-  //   return <Login/>;
-  // }
   return (
     <div className="App">
       <Layout >
@@ -35,6 +34,8 @@ function App() {
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/results" element={<Results />} />
             <Route path="/courses" element={<Courses />} />
+            <Route path="/faculty-dashboard" element={<FacultyDashboard />} />
+            <Route path="/course-management" element={<CourseManagement />} />
           </Routes>
         
         </BrowserRouter>
