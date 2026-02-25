@@ -2,18 +2,18 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Layout/Layout';
 import Layout from './components/Layout/Layout';
-import Profile from './pages/Profile';
-import Attendance from './pages/Attendance';
-import Timetable from './pages/Timetable';
-import Reports from './pages/Reports';
-import Billing from './pages/Billing';
-import Announcements from './pages/Announcements'; 
-import Feedback from './pages/Feedback';
+import Profile from './pages/student/Profile';
+import Attendance from './pages/student/Attendance';
+import Timetable from './pages/student/Timetable';
+import Reports from './pages/student/Reports';
+import Billing from './pages/student/Billing';
+import Announcements from './pages/student/Announcements'; 
+import Feedback from './pages/student/Feedback';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Results from './pages/Results';
-import Dashboard from './pages/Dashboard';
+import Results from './pages/student/Results';
+import Dashboard from './pages/student/Dashboard';
 import Courses from './components/course_c/CoursesPage';
-import Login from './pages/Login';
+import Login from './pages/student/Login';
 
 function App() {
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import CourseList from '../components/course/CourseList';
-import CourseDetails from '../components/course/CourseDetails';
+import CourseList from '../../components/course/CourseList';
+import CourseDetails from '../../components/course/CourseDetails';
 import './Course.css';
 
 // API service (move to separate file in real implementation)
