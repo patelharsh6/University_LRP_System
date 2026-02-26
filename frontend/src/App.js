@@ -21,6 +21,13 @@ function App() {
 
   return (
     <div className="App">
+
+      {/* <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter> */}
+      
       <Layout >
         <BrowserRouter>
           <Routes>
@@ -40,6 +47,7 @@ function App() {
         
         </BrowserRouter>
       </Layout>
+
       
     </div>
   );
